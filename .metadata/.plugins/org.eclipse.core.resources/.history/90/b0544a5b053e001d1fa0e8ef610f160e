@@ -1,0 +1,23 @@
+# 로또 생성하시오..
+from random import random
+
+ran = random(1, 45)
+print(ran, ran)
+    
+lotto = random.range(1, 45)
+print("로또번호: {}".format(lotto))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#

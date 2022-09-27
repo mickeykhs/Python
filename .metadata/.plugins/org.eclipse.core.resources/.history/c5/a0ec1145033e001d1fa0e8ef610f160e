@@ -1,0 +1,7 @@
+# 로또 생성하시오..
+a = input("꺼낼 숫자의 개수")
+aa = int(a)
+
+b = range(1,46)
+for i in b:
+    print(i)

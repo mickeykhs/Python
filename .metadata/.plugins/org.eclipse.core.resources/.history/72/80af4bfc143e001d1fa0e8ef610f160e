@@ -1,0 +1,7 @@
+from random import random
+def getLotto():
+    rnd = int(random()*len(arr6))
+    return arr6
+
+arr6 = getLotto()
+print(arr6)

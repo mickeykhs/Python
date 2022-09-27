@@ -1,0 +1,23 @@
+# 로또 생성하시오..
+from random import random
+
+rnd = random(46)+1
+print(rnd)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#

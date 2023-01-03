@@ -1,9 +1,0 @@
-def addminmuldiv(a, b):
-    return a + b, a - b, a * b, a / b
-
-sum,min,mul,div= addminmuldiv(4, 6)
-print("sum", sum)
-print("min", min)
-print("mul", mul)
-print("div", div)
-print("두수의 합=>", sum, "두수의 차 =>", min, "두수의 곱=>", mul, "나눗셈=>", div)

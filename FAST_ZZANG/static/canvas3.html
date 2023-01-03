@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+      canvas { border: 1px solid black; }
+</style>
+<script type="text/javascript">
+var cvr2D = [
+	[1,0,1,0],
+	[1,1,1,0],
+	[0,0,0,1],
+	[1,1,0,0]
+];
+
+
+function draw() {
+      var canvas = document.getElementById("mycan");
+      var ctx = canvas.getContext("2d");
+      for(var i=0; i<4; i++){
+      	 for(var j=0; j<4; j++){
+      		if(cvr2D[i][j] == 1){
+      			 ctx.fillStyle = "#fff000"; // 노랑
+      		} else {
+      			ctx.fillStyle = "#000000";  // 검정
+      		}
+   	        ctx.fillRect (j*51 , i*51, 50, 50);
+      		
+      	 }
+      }
+        
+        
+}
+
+
+</script>
+</head>
+<body onload="draw()">
+
+	<canvas id="mycan" width="700px" height="700px">
+
+</canvas>
+
+
+</body>
+</html>

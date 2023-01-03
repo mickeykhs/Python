@@ -1,6 +1,0 @@
-# 로또 생성하시오..
-a = input("로또")
-
-b = range(1,46)
-for i in b:
-    print(i)

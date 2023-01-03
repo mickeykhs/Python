@@ -1,7 +1,0 @@
-def add(a, b):
-    return a + b
-sum = add(4, 6)
-
-def minus(a, b):
-mi = minus(4, 6)
-print("합계=>", sum, "두수의 차 =>", mi)

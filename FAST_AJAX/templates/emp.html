@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body {
+	margin: 0;
+	background-image: url('/static/js/back1.jpg');
+	color: white;
+}
+*{
+	font-family: IBM Plex mono;
+	font-size: 1.2rem;
+}
+a {
+	text-decoration: none;
+	color: yellow;
+}
+.sort {
+	display:flex;
+	justify-content: center;
+}
+.btn {
+	display:flex;
+	justify-content: space-around;
+	width: 300px;
+	padding-left: 50px;
+}
+.bt {
+	background-color: bisque;
+	cursor: pointer;
+}
+.bt:hover {
+	transform: scale(1.5);
+	background-color: yellow;
+}
+.aa {
+	margin-right: 20px;
+	margin-bottom: 20px;
+	color: yellow;
+}
+.bb{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	height:40vh;
+}
+.cc {
+	border: 20px groove beige; 
+	width: 370px;
+	padding: 15px;
+	height: 250px;
+}
+.tb {
+	border-color: white;
+}
+input {
+	border-radius: 20px;
+	text-align: center;
+}
+thead {
+	color: springgreen;
+}
+</style>
+<script src="static/js/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	fn_list();
+});
+
+function fn_list(){
+	$.ajax({
+        url: "emp_selects",
+        type: "get",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+        	var emps = data;
+			
+        	var txt = "";
+        	
+        	for(var i=0; i<emps.length; i++){
+        		var emp = emps[i];
+	        	txt += `
+	        		<tr>
+			    		<td><a href="javascript:fn_one('${emp.e_id}')">${emp.e_id}</a></td>
+			    		<td>${emp.e_name}</td>
+			    		<td>${emp.sex}</td>
+			    		<td>${emp.addr}</td>
+		    		</tr>
+	        	`;
+        	}
+        	$("#mytbody").html(txt);
+        	
+        	
+        	console.log(txt);
+        	
+        },
+
+    });
+}
+
+
+
+function fn_one(e_id){
+	var params = JSON.stringify({
+		'e_id':e_id
+	});
+	
+	$.ajax({
+        url: "emp_select",
+        type: "post",
+        data: params,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+        	console.log(data);
+        	var emp = data;
+        	$('#e_id').val(emp.e_id);
+        	$('#e_name').val(emp.e_name);
+        	$('#sex').val(emp.sex);
+        	$('#addr').val(emp.addr);
+        },
+
+    });
+}
+
+function fn_insert(){
+	
+	var params = JSON.stringify({
+		'e_id':$('#e_id').val(), 	
+		'e_name':$('#e_name').val(), 	
+		'sex':$('#sex').val(), 	
+		'addr':$('#addr').val() 	
+	});
+	
+	$.ajax({
+        url: "emp_insert",
+        type: "post",
+        data: params,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+        	console.log(data);
+        	var cnt = data;
+        	if(cnt ==1){
+        		fn_list();
+        		$('#e_id').val("");
+        		$('#e_name').val("");
+        		$('#sex').val("");
+        		$('#addr').val("");
+        	} else {
+        		alert("추가 도중 문제가 생겼습니다.")
+        	}
+        	
+        },
+
+    });
+}
+function fn_update(){
+	
+	var params = JSON.stringify({
+		'e_id':$('#e_id').val(), 	
+		'e_name':$('#e_name').val(), 	
+		'sex':$('#sex').val(), 	
+		'addr':$('#addr').val() 	
+	});
+	
+	$.ajax({
+        url: "emp_update",
+        type: "post",
+        data: params,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+        	console.log(data);
+        	var cnt = data;
+        	if(cnt ==1){
+        		fn_list();
+        		$('#e_id').val("");
+        		$('#e_name').val("");
+        		$('#sex').val("");
+        		$('#addr').val("");
+        	} else {
+        		alert("수정 도중 문제가 생겼습니다.")
+        	}
+        	
+        },
+
+    });
+}
+function fn_delete(){
+	
+	var params = JSON.stringify({
+		'e_id':$('#e_id').val()
+		
+	});
+	
+	$.ajax({
+        url: "emp_delete",
+        type: "post",
+        data: params,
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data) {
+        	console.log(data);
+        	var cnt = data;
+        	if(cnt ==1){
+        		fn_list();
+        		$('#e_id').val("");
+        		$('#e_name').val("");
+        		$('#sex').val("");
+        		$('#addr').val("");
+        	} else {
+        		alert("삭제 도중 문제가 생겼습니다.")
+        	}
+        },
+
+    });
+}
+
+
+</script>
+</head>
+<body>
+<div class="bb">
+     <table class="tb" border="1px" style="width:30vw;text-align:center;">
+     	<thead>
+       		<tr>
+		        <td>사번</td>
+		        <td>이름</td>
+		        <td>성별</td>
+	         	<td>주소</td>
+        	</tr>
+        </thead>
+        <tbody id="mytbody">
+	    	<tr>
+	    		<td>1</td>
+	    		<td>1</td>
+	    		<td>1</td>
+	    		<td>1</td>
+	    	</tr>
+    	</tbody>
+    </table>
+</div>
+    <br>
+    
+<div class="bb">
+    <div class="cc">
+    	<div class="sort">
+    		<div class="aa">사번</div>
+    		<div>
+    			<input type="text" id="e_id" />
+    		</div>
+    	</div>
+    	<div class="sort">
+    		<div class="aa">이름</div>
+    		<div>
+    			<input type="text" id="e_name" />
+    		</div>
+    	</div>
+    	<div class="sort">
+    		<div class="aa">성별</div>
+    		<div>
+    			<input type="text" id="sex" />
+    		</div>
+    	</div>
+    	<div class="sort">
+    		<div class="aa">주소</div>
+    		<div>
+    			<input type="text" id="addr" />
+    		</div>
+    	</div>
+    	<div>
+    		<div class="btn">
+    			<input type="button" class="bt" value="추가" onclick="fn_insert()"/>
+    			<input type="button" class="bt" value="수정" onclick="fn_update()"/>
+    			<input type="button" class="bt" value="삭제" onclick="fn_delete()"/>
+    		</div>
+    	</div>
+    </div>
+</div>
+</body>
+</html>

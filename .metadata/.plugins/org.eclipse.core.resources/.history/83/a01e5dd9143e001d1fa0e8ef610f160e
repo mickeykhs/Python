@@ -1,7 +1,0 @@
-from random import random
-def getLotto():
-    ran = random()*45
-    return arr6
-
-arr6 = getLotto()
-print(arr6)
